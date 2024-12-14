@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Xml;
 
 
@@ -8,14 +9,12 @@ public class MainClass
 {
     public static void Main()
     {
-        char c = '1';
-        Console.WriteLine((int)c);
 
-        char first = 'B';
-        char second = 'v';
+        char c = char.Parse(Console.ReadLine()!);  // 0 = 48, 9 = 57
+        // Console.WriteLine((char)(c - 32));
 
-        Console.WriteLine(first < second); // true
-        // [!] когда сравниваем char, то сравниваем их коды (они заданы таблице ASCII)
+        if (c >= 'a' && c <= 'z') Console.WriteLine((char)(c - 32));
+        else if (c >= 'A' && c <= 'Z') Console.WriteLine((char)(c + 32));
 
     }
 }
