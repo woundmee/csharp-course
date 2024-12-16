@@ -10,12 +10,10 @@ public class MainClass
 {
     public static void Main()
     {
-        string text = "abcba"; //Console.ReadLine();
-        char[] textToChar = text.ToCharArray();
-        Array.Reverse(textToChar);
-        string textReversed = new string(textToChar);
+        string str = "abcba    фыфы     !"; //Console.ReadLine();
 
-        Console.WriteLine(text == textReversed ? "YES" : "NO");
+        var newStr = str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        System.Console.WriteLine(string.Join(" ", newStr));
 
     }
 }
