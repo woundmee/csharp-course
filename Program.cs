@@ -10,10 +10,16 @@ public class MainClass
 {
     public static void Main()
     {
-        string str = "abcba    фыфы     !"; //Console.ReadLine();
+        string str = "testers"; //Console.ReadLine();
 
-        var newStr = str.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        System.Console.WriteLine(string.Join(" ", newStr));
+        var newStr = str
+        .Where(x => char.IsLetter(x))
+        .GroupBy(x => x)
+        .Select(s => new { key = s.Key, count = s.Count() })
+        .OrderBy(s => s.key);
+
+        foreach (var item in newStr)
+            Console.WriteLine(item.key + " " + item.count);
 
     }
 }
