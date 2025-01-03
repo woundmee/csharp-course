@@ -33,26 +33,4 @@ public class MainClass
         Console.WriteLine(buffer);
     }
 
-
-
-    static string Encrypt(string text, int shift)
-    {
-        char[] buffer = text.ToCharArray();
-
-        for (int i = 0; i < buffer.Length; i++)
-        {
-            char letter = buffer[i];
-            // Проверяем, является ли символ буквой
-            if (char.IsLetter(letter))
-            {
-                // Определяем базу (A или a)
-                char offset = char.IsUpper(letter) ? 'А' : 'а';
-                // Сдвигаем символ и добавляем к буферу
-                letter = (char)((((letter + shift) - offset) % 32) + offset);
-                buffer[i] = letter;
-            }
-        }
-
-        return new string(buffer);
-    }
 }
