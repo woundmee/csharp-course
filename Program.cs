@@ -1,25 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Text.Json;
 using System.Xml;
 
 
 public class MainClass
 {
-    public static void Main()
+    static void Main()
     {
-        string str = "testers"; //Console.ReadLine();
+        string text = "ЭЮЯ";
+        int key = 2;
 
-        var newStr = str
-        .Where(x => char.IsLetter(x))
-        .GroupBy(x => x)
-        .Select(s => new { key = s.Key, count = s.Count() })
-        .OrderBy(s => s.key);
+        char[] buffer = text.ToCharArray();
+        for (int i = 0; i < buffer.Length; i++)
+        {
+            char letter = buffer[i];  // берем букву
+            if (char.IsLetter(letter))  // проверяем буква ли это
+            {
+                // здесь использованы русские Аа (для анг. версии поменять на англ. буквы)
+                char offset = char.IsUpper(letter) ? 'А' : 'а';  // определяем какая это буква (большая/маленькая)
+                letter = (char)((((letter + key) - offset) % 32) + offset);
+                buffer[i] = letter;
+            }
+        }
 
-        foreach (var item in newStr)
-            Console.WriteLine(item.key + " " + item.count);
+        Console.WriteLine(buffer);
+    }
 
+
+
+    static string Encrypt(string text, int shift)
+    {
+        char[] buffer = text.ToCharArray();
+
+        for (int i = 0; i < buffer.Length; i++)
+        {
+            char letter = buffer[i];
+            // Проверяем, является ли символ буквой
+            if (char.IsLetter(letter))
+            {
+                // Определяем базу (A или a)
+                char offset = char.IsUpper(letter) ? 'А' : 'а';
+                // Сдвигаем символ и добавляем к буферу
+                letter = (char)((((letter + shift) - offset) % 32) + offset);
+                buffer[i] = letter;
+            }
+        }
+
+        return new string(buffer);
     }
 }
