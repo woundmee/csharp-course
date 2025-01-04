@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
+using System.Threading.Tasks.Dataflow;
 using System.Xml;
 
 
@@ -14,23 +16,22 @@ public class MainClass
 {
     static void Main()
     {
-        string text = "ЭЮЯ";
-        int key = 2;
+        // int n = int.Parse(Console.ReadLine()!);
+        // string[] numbs = Console.ReadLine()!.Split(' ');
 
-        char[] buffer = text.ToCharArray();
-        for (int i = 0; i < buffer.Length; i++)
+        int n = 5;
+        string[] numbs = "1 2 3 4".Split(' ');
+        string res = "";
+
+        for (int i = 1; i < n; i += 2)
         {
-            char letter = buffer[i];  // берем букву
-            if (char.IsLetter(letter))  // проверяем буква ли это
-            {
-                // здесь использованы русские Аа (для анг. версии поменять на англ. буквы)
-                char offset = char.IsUpper(letter) ? 'А' : 'а';  // определяем какая это буква (большая/маленькая)
-                letter = (char)((((letter + key) - offset) % 32) + offset);
-                buffer[i] = letter;
-            }
+            res += numbs[i] + " ";
+            res += numbs[i - 1] + " ";
         }
 
-        Console.WriteLine(buffer);
+        if (numbs.Length % 2 != 0) res += numbs[numbs.Length - 1];
+        Console.WriteLine(res);
+
     }
 
 }
