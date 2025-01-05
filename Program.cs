@@ -17,20 +17,18 @@ public class MainClass
     static void Main()
     {
         // int n = int.Parse(Console.ReadLine()!);
-        // string[] numbs = Console.ReadLine()!.Split(' ');
+        // string[] arr = Console.ReadLine()!.Split(' ');
 
         int n = 5;
-        string[] numbs = "1 2 3 4".Split(' ');
-        string res = "";
+        string[] arr = "1 2 1 3 1".Split(' ');
 
-        for (int i = 1; i < n; i += 2)
-        {
-            res += numbs[i] + " ";
-            res += numbs[i - 1] + " ";
-        }
+        int[] arrInt = new int[arr.Length];
+        for (int i = 0; i < n; i++)
+            arrInt[i] = int.Parse(arr[i]);
 
-        if (numbs.Length % 2 != 0) res += numbs[numbs.Length - 1];
-        Console.WriteLine(res);
+        var res = arrInt.GroupBy(x => x).Where(x => x.Count() == 1).Select(x => x.Key);
+        foreach(var item in res)
+            System.Console.Write(item + " ");
 
     }
 
