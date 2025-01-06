@@ -16,64 +16,38 @@ public class MainClass
 {
     static void Main()
     {
-        // ПРОВЕРКА НА СИММЕТРИЧНОСТЬ 2-МЕРНОГО МАССИВА.
-        // т.е. чтобы все значения (за исключением главной диагонали) были симметричны.
-
-        // для одномерного массива симметричность - это просто палиндром: 1 2 3 2 1
+        // ДВУМЕРНЫЙ МАССИВ: ТАБЛИЦА УМНОЖЕНИЯ
 
 
         // int n = int.Parse(Console.ReadLine()!);
         // string[] arr = Console.ReadLine()!.Split(' ');
 
-        int n = 3;
-        int[,] arr = new int[n, n];
+        string[] x = "2 3".Split(' ');
+        
+        int n = int.Parse(x[0]);
+        int m = int.Parse(x[1]);
+
+        int[,] arr = new int[n, m];
 
         for (int i = 0; i < n; i++)
         {
-            string[] input = Console.ReadLine()!.Split(' ');
-            for (int j = 0; j < n; j++)
-                arr[i, j] = int.Parse(input[j]);
-        }
-
-        bool isSym = true;
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < n; j++)
+            for (int j = 0; j < m; j++)
             {
-                if (arr[i, j] != arr[j, i]) { isSym = false; break; }
+                arr[i, j] = (i + 1) * (j + 1);
             }
-            if (!isSym) break;  // чтобы дальше цикл не гонять, т.к. итак уже фолс
         }
 
-        Console.WriteLine(isSym ? "YES" : "NO");
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < m; j++)
+                Console.Write(arr[i, j] + " ");
+            Console.WriteLine();
+        }
+            
+
+
 
     }
 
 }
 
-
-
-// int n = 10;
-
-//         int[,] arr = new int[n, n];
-
-//         for (int i = 0; i < n; i++)
-//         {
-//             for (int j = 0; j < n; j++)
-//             {
-//                 // NOTE: ОБРАТИТЬ ВНИМАНИЕ!
-//                 if (j == n - 1 - i) arr[i, j] = 1;
-//                 else if (j < n - i) arr[i, j] = 0;
-//                 else arr[i, j] = 2;
-//             }
-//         }
-
-
-//         for (int i = 0; i < n; i++)
-//         {
-//             for (int j = 0; j < n; j++)
-//             {
-//                 Console.Write(arr[i, j] + " ");
-//             }
-//             Console.WriteLine();
-//         }
