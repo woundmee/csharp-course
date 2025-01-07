@@ -16,36 +16,21 @@ public class MainClass
 {
     static void Main()
     {
-        // ДВУМЕРНЫЙ МАССИВ: ТАБЛИЦА УМНОЖЕНИЯ
-
-
+       
         // int n = int.Parse(Console.ReadLine()!);
         // string[] arr = Console.ReadLine()!.Split(' ');
 
-        string[] x = "2 3".Split(' ');
+        int x = 5;
+        string[] arr = "1 1 2 2 3".Split(' ');
+        int[] arrInt = new int[arr.Length];
+
+        for (int i = 0; i < arr.Length; i++)
+            arrInt[i] = int.Parse(arr[i]);
+
+        int arrIntDist = arrInt.Distinct().ToArray().Count();
+        Console.WriteLine(arrIntDist);
         
-        int n = int.Parse(x[0]);
-        int m = int.Parse(x[1]);
-
-        int[,] arr = new int[n, m];
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-            {
-                arr[i, j] = (i + 1) * (j + 1);
-            }
-        }
-
-        for (int i = 0; i < n; i++)
-        {
-            for (int j = 0; j < m; j++)
-                Console.Write(arr[i, j] + " ");
-            Console.WriteLine();
-        }
-            
-
-
+        
 
     }
 
