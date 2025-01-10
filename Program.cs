@@ -16,21 +16,57 @@ public class MainClass
 {
     static void Main()
     {
-       
+
         // int n = int.Parse(Console.ReadLine()!);
         // string[] arr = Console.ReadLine()!.Split(' ');
 
-        int x = 5;
-        string[] arr = "1 1 2 2 3".Split(' ');
-        int[] arrInt = new int[arr.Length];
+        //string[] x = Console.ReadLine()!.Split(' ');
+        // string[] arr = "1 2 3 -2 -4".Split(' ');
 
-        for (int i = 0; i < arr.Length; i++)
-            arrInt[i] = int.Parse(arr[i]);
+        int n = 3; //int.Parse(x[0]);
+        int m = 3; //int.Parse(x[1]);
+        bool captcha = false;
 
-        int arrIntDist = arrInt.Distinct().ToArray().Count();
-        Console.WriteLine(arrIntDist);
-        
-        
+        int[,] arr = new int[n, m];
+
+        for (int i = 0; i < n; i++)
+        {
+            string[] input = Console.ReadLine()!.Split(' ');
+            for (int j = 0; j < m; j++)
+            {
+                arr[i, j] = int.Parse(input[j]);
+            }
+        }
+
+        int searchNumb = int.Parse(Console.ReadLine()!);  // необходимо найти в массиве
+        int attempt = int.Parse(Console.ReadLine()!);  // попытки
+
+        for (int i = 0; i < attempt; i++)
+        {
+            string[] input = Console.ReadLine()!.Split(' ');
+            for (int j = 0; j < attempt; j++)
+            {
+                int ii = int.Parse(input[0]);
+                int jj = int.Parse(input[1]);
+                if (arr[ii, jj] == searchNumb)
+                {
+                    // Console.WriteLine(arr[ii, jj]);
+                    captcha = true;
+                }
+                else {
+                    captcha = false;
+                    break;
+                }
+            }
+        }
+
+
+        Console.WriteLine(captcha ? "Captcha успешно пройдена" : "Вы не человек");
+
+
+
+
+
 
     }
 
