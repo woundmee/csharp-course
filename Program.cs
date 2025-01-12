@@ -1,35 +1,46 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Net;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks.Dataflow;
-using System.Xml;
 
-
-public class MainClass
+class Program
 {
-    static void Main()
+
+    static int DoubleFact(int x)  // двойной факториал
     {
-        // input1: 13:00, input2: 17:00
-        string sleep = Console.ReadLine()!;
-        string alarm = Console.ReadLine()!;
+        bool isEven = false;
+        int factSum = 1;
 
-        TimeSpan s = TimeSpan.Parse(sleep);
-        TimeSpan a = TimeSpan.Parse(alarm);
+        // проверяю на четность
+        if (x % 2 == 0) isEven = true;
+        else isEven = false;
 
-        
-        if (a < s)
-            a = a.Add(new TimeSpan(24, 0, 0));
-        
-        TimeSpan diff = a - s;
-
-        Console.WriteLine($"Будильник зазвонит через {diff.Hours} час(часов) и {diff.Minutes} минут.");
+        if (isEven)
+        {
+            for (int i = 1; i <= x; i++)
+                if (isEven && i % 2 == 0)
+                    factSum *= i;
+        }
+        else
+        {
+            for (int i = 1; i <= x; i++)
+                if (!isEven && i % 2 != 0)
+                    factSum *= i;
+        }
+        return factSum;
     }
-}
 
+    public static void Main()
+    {
+        // string[] x = Console.ReadLine()!.Split(' ');
+
+        int a = int.Parse(Console.ReadLine()!);
+        int b = int.Parse(Console.ReadLine()!);
+        int c = int.Parse(Console.ReadLine()!);
+
+        string res = DoubleFact(a) + " " + DoubleFact(b) + " " + DoubleFact(c);
+        Console.WriteLine(res);
+
+    }
+
+}
