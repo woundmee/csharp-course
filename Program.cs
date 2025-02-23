@@ -1,46 +1,51 @@
-﻿using System;
-using System.Security.Cryptography;
-using System.Collections.Generic;
-using System.Net;
+﻿
+
+
+using System.IO.Pipes;
+
+namespace Main;
 
 class Program
 {
-
-    static int DoubleFact(int x)  // двойной факториал
+    static void Main()
     {
-        bool isEven = false;
-        int factSum = 1;
+        Book book = new Book(new JsonPrinter());
+        book.Text = "loren ipsum...";
+        book.Print();
+    }
+}
 
-        // проверяю на четность
-        if (x % 2 == 0) isEven = true;
-        else isEven = false;
 
-        if (isEven)
-        {
-            for (int i = 1; i <= x; i++)
-                if (isEven && i % 2 == 0)
-                    factSum *= i;
-        }
-        else
-        {
-            for (int i = 1; i <= x; i++)
-                if (!isEven && i % 2 != 0)
-                    factSum *= i;
-        }
-        return factSum;
+interface IPrinter
+{
+    void Print(string text);
+}
+
+class Book
+{
+    public string Text { get; set; } = "";
+    private readonly IPrinter _printer;
+
+    internal Book(IPrinter printer)
+    {
+        _printer = printer;
     }
 
-    public static void Main()
+    internal void Print()
     {
-        // string[] x = Console.ReadLine()!.Split(' ');
-
-        int a = int.Parse(Console.ReadLine()!);
-        int b = int.Parse(Console.ReadLine()!);
-        int c = int.Parse(Console.ReadLine()!);
-
-        string res = DoubleFact(a) + " " + DoubleFact(b) + " " + DoubleFact(c);
-        Console.WriteLine(res);
-
+        _printer.Print(Text);
     }
 
+}
+
+class ConsolePrinter : IPrinter
+{
+    public void Print(string text)
+        => Console.WriteLine("Вывод в консоль: " + text);
+}
+
+class JsonPrinter : IPrinter
+{
+    public void Print(string text)
+        => Console.WriteLine("Вывод в json: " + text);
 }
